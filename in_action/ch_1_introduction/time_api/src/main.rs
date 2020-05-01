@@ -1,4 +1,5 @@
 #![feature(proc_macro_hygiene, decl_macro)]
+
 extern crate chrono;
 #[macro_use]
 extern crate serde_derive;
@@ -8,7 +9,7 @@ extern crate rocket_contrib;
 
 use chrono::prelude::*;
 use rocket::response::content::Html;
-use rocket_contrib::json::JSON;
+use rocket_contrib::json::Json;
 
 #[derive(Serialize)]
 struct Timestamp {
@@ -19,7 +20,7 @@ struct Timestamp {
 fn index() -> Html<String> {
     let content: &str = "
     <h1>Hello, Rust in Action!</h1>
-    <p> What is the <a href=\"/now\">time</a>></p>
+    <p> What is the <a href=\"/now\">time</a>?</p>
     ";
     let content_as_string = String::from(content);
     Html(content_as_string)
