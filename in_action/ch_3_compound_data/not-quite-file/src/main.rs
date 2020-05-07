@@ -1,23 +1,19 @@
-#![allow(unused_variables)]             //relax compiler warnings
+#[derive(Debug)]                        // Allows the println! macro to print File         
 
-type File = String;                     //create type alias
-
-fn open(f: &mut File) -> bool {
-    true                                //assume these functions succeeds
+struct File {
+    name: String,
+    data: Vec<u8>,                      //Using Vec<u8> provides access to some useful conveniences such as writing to a file
 }
 
-fn close(f: &mut File) -> bool {
-    true
-}
-
-#[allow(dead_code)]                                         //relaxes compiler warnings
-fn read(f: &mut File, save_to: &mut Vec<[u8]>) -> ! {       //Using ! as return type indicates to the Compiler that this function never returns
-    unimplemented!()                                        // A macro that crashes the program if it is encountered
-}
 
 fn main() {
-    let mut f1 = File::from("f1.txt");                      //With the type declaration on line 3, File inherits String methods
-    open(&mut f1);
-    //read(f1, vec![]);
-    close(&mut f1);
+    let f1 = File {
+        name: String::from("f1.txt"),
+        data: Vec::new(),
+    };
+
+    let f1_name = &f1.name;
+    let f1_length = &f1.data.len();
+    println!("{:?}", f1);
+    println!("{} is {} bytes long", f1_name, f1_length);
 }
