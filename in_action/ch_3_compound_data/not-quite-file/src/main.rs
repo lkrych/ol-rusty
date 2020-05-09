@@ -30,9 +30,8 @@ impl File {
         save_to.append(&mut tmp);                       // allocate sufficent data in the save_to buffer to hold the contents of f
         Ok(read_length)
     }
-
-    
 }
+
 fn open(mut f: File) -> Result<File, String> {
     f.state = FileState::Open;
     Ok(f)
