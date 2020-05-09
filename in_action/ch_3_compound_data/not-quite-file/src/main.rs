@@ -1,9 +1,12 @@
+//! Simulating files one step at a time
+
 #[derive(Debug, PartialEq)]
 pub enum FileState {
     Open,
     Closed,
 }
 
+/// Represents a "file"
 #[derive(Debug)]                        // Enables file to work with printlnl! and its fmt! siblings       
 pub struct File {
     name: String,
@@ -12,6 +15,7 @@ pub struct File {
 }
 
 impl File {
+    /// New files are assumed to be empty, but a name is required.
     pub fn new(name: &str) -> File {
         File {
             name: String::from(name),
@@ -19,7 +23,7 @@ impl File {
             state: FileState::Closed
         }
     }
-
+    /// Reads the file into memory
     fn read(self: &File, save_to: &mut Vec<u8>) -> Result<usize, String> { //return number of bytes read
         if self.state != FileState::Open {
             return Err(String::from("File must be open for reading"));
@@ -30,6 +34,15 @@ impl File {
         save_to.append(&mut tmp);                       // allocate sufficent data in the save_to buffer to hold the contents of f
         Ok(read_length)
     }
+    /// Returns the file's length in bytes. 
+    pub fn len(&self) -> usize {
+        self.data.len() 
+    }
+    /// Returns the file's name. 
+    pub fn name(&self) -> String {
+        self.name.clone() 
+    }
+
 }
 
 fn open(mut f: File) -> Result<File, String> {

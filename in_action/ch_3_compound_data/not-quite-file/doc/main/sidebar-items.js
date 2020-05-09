@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["FileState",""]],"struct":[["File","Represents a \"file\""]]});
